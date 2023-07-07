@@ -16,7 +16,7 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.fabAddMovie.setOnClickListener(view -> {
-            Snackbar.make(binding.getRoot(), "Add aa movie", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(binding.getRoot(), "Add a movie", Snackbar.LENGTH_SHORT).show();
         });
         setSupportActionBar(binding.tbPlayzoom);
     }
