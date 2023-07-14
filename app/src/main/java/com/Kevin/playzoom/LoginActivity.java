@@ -14,6 +14,7 @@ import com.Kevin.playzoom.databinding.ActivityLoginBinding;
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnLogin.setOnClickListener(v -> {
             //Toast.makeText(this, "Login press", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this,PrincipalActivity.class);
+            intent.putExtra(PrincipalActivity.EMAIL, binding.tilEmail.getEditText().getText().toString());
             startActivity(intent);
             finish();
         });
