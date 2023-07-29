@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.Kevin.playzoom.databinding.ActivityPrincipalBinding;
+import com.Kevin.playzoom.fragments.HomeFragment;
 import com.google.android.material.snackbar.Snackbar;
 
 public class PrincipalActivity extends AppCompatActivity {
@@ -20,11 +21,19 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPrincipalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        binding.fabAddMovie.setOnClickListener(view -> {
-            Snackbar.make(binding.getRoot(), "Add a movie", Snackbar.LENGTH_SHORT).show();
-        });
         setSupportActionBar(binding.tbPlayzoom);
+        setSession();
+        addHomeFragment();
+
+    }
+
+    private void addHomeFragment() {
+        getSupportFragmentManager().
+                beginTransaction()
+                .add(binding.fcvMain.getId(), new HomeFragment()).commit();
+    }
+
+    private void setSession() {
         Intent getIntent = getIntent();
         email = getIntent.getStringExtra(EMAIL);
         binding.txtEmail.setText(email);
