@@ -1,5 +1,6 @@
 package com.Kevin.playzoom.data.db;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -17,7 +18,7 @@ public interface ShowDao {
     public ShowEntity getShowByName(String name);
 
     @Query("SELECT * FROM show")
-    public List<ShowEntity> getAll();
+    public LiveData<List<ShowEntity>> getAll();
 
     @Delete
     public void deleteShow(ShowEntity show);

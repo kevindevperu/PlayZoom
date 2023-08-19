@@ -8,17 +8,25 @@ import androidx.room.RoomDatabase;
 
 import com.Kevin.playzoom.model.ShowEntity;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @Database(entities = {ShowEntity.class}, version = 1)
 public abstract class PlayZoomDatabase extends RoomDatabase {
     public abstract ShowDao showDao();
 
-    public static PlayZoomDatabase db;
+    private static volatile PlayZoomDatabase db;
+
+    public static final ExecutorService dataBaseWriteExecutor = Executors.newFixedThreadPool(4);
 
     public static PlayZoomDatabase getInstance(Context context){
-        PlayZoomDatabase dbTemp = db;
-        if (dbTemp == null){
-            dbTemp = Room.databaseBuilder(context.getApplicationContext(), PlayZoomDatabase.class, "shows-database").build();
-            db = dbTemp;
+        if (db == null){
+            synchronized (PlayZoomDatabase.class){
+                if (db == null){
+                    db = Room.databaseBuilder(context.getApplicationContext(), PlayZoomDatabase.class, "shows-database").build();
+                }
+            }
         }
         return  db;
     }
